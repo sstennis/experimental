@@ -14,7 +14,7 @@
 #
 # [Remember: No empty lines between comments and class definition]
 class sunjava (
-  $os = '' 
+  $os = undef 
   ) {
 
   # Download and install Sun java.
