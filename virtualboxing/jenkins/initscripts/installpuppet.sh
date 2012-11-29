@@ -41,6 +41,7 @@ enabled=0
 gpgcheck=0
 EOF'
 
+sudo yum remove ruby
 sudo yum install -y ruby ruby-irb ruby-rdoc
 sudo yum --enablerepo="ruby" update -y ruby ruby-irb ruby-rdoc
 
