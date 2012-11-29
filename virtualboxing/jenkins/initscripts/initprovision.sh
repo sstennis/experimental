@@ -91,16 +91,16 @@ esac
 git --version 2>&1 >/dev/null # improvement by tripleee
 GIT_IS_AVAILABLE=$?
 if [ ! $GIT_IS_AVAILABLE -eq 0 ]; then
- echo "Warning: Git does not appear to be installed"
- echo "Attempting git install..."
- 
- # Note that password entry may be required to run these commands.
- sudo rpm -Uvh http://repo.webtatic.com/yum/centos/5/latest.rpm
- sudo yum -y install --enablerepo=webtatic git
- 
- if [ ! $? -eq 0 ]; then
- 	die "Error: failed to install git."
- fi
+	echo "Warning: Git does not appear to be installed"
+	echo "Attempting git install..."
+	
+	# Note that password entry may be required to run these commands.
+	sudo rpm -Uvh http://repo.webtatic.com/yum/centos/5/latest.rpm
+	sudo yum -y install --enablerepo=webtatic git
+	
+	if [ ! $? -eq 0 ]; then
+		die "Error: failed to install git."
+	fi
 fi
 
 
@@ -143,5 +143,17 @@ fi
 # Update any submodules (other git repos within our git repo) in the repo
 git submodule update
 
-# Now, run the install puppet script
-sudo . installpuppet.sh
+
+
+# Check that puppet is installed
+puppet --version 2>&1 >/dev/null # improvement by tripleee
+PUPPET_IS_AVAILABLE=$?
+if [ ! $PUPPET_IS_AVAILABLE -eq 0 ]; then
+ 	echo "Warning: Puppet does not appear to be installed"
+ 	echo "Attempting puppet install..."
+ 
+	sudo $REPOSITORY_DIRECTORY/virtualboxing/jenkins/initscripts/installpuppet.sh
+	if [ ! $? -eq 0 ]; then
+		die "Error: failed to install puppet."
+	fi
+fi
