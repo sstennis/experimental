@@ -102,7 +102,7 @@ class jenkinsprep::install {
   #}
 
   # install apache and add a proxy for jenkins
-  #class { 'apache': osfamily => 'RedHat', }
+  #class { 'apache': }
   #class { 'apache::mod::proxy': }
 
   #apache::mod { 'php5': }
