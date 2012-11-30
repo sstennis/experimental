@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Copied from http://awaseroot.wordpress.com/2012/09/01/new-script-install-puppet-on-centos/
+#
 
 sudo sh -c \
 'sudo cat > /etc/yum.repos.d/puppet.repo << EOF
@@ -15,8 +18,9 @@ sudo sh -c \
 [ruby]
 name=ruby
 #baseurl=http://repo.premiumhelp.eu/ruby/
-baseurl=http://centos.karan.org/el\$releasever/ruby187/\$basearch/
-gpgkey=http://centos.karan.org/RPM-GPG-KEY-karan.org.txt
+#baseurl=http://centos.karan.org/el\$releasever/ruby187/\$basearch/
+#gpgkey=http://centos.karan.org/RPM-GPG-KEY-karan.org.txt
+baseurl=http://rubyworks.rubyforge.org/redhat/RPMS/\$basearch/
 gpgcheck=0
 enabled=0
 EOF'
@@ -38,10 +42,12 @@ enabled=0
 gpgcheck=0
 EOF'
 
-sudo yum install -y ruby
-sudo yum --enablerepo="ruby" update -y ruby
+sudo yum remove -y ruby ruby-libs ruby-irb ruby-rdoc
+sudo yum install -y ruby ruby-libs ruby-irb ruby-rdoc
+sudo yum --enablerepo="ruby" update -y ruby ruby-libs ruby-irb ruby-rdoc
 
-sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-7.noarch.rpm
+sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/\$basearch/epel-release-5-4.noarch.rpm
+#sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/\$basearch/epel-release-6-7.noarch.rpm
 #sudo yum update
 
 sudo yum --enablerepo=epel,epel-puppet install -y puppet
