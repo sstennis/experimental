@@ -25,9 +25,10 @@ name=ruby
 #baseurl=http://centos.karan.org/el\$releasever/ruby187/\$basearch/
 #gpgkey=http://centos.karan.org/RPM-GPG-KEY-karan.org.txt
 # Unfortunately, rubyworks only has up to 1.8.6.
-baseurl=http://rubyworks.rubyforge.org/redhat/\$releasever/RPMS/\$basearch
-gpgkey=http://rubyworks.rubyforge.org/RubyWorks.GPG.key
-gpgcheck=1
+#baseurl=http://rubyworks.rubyforge.org/redhat/\$releasever/RPMS/\$basearch
+#gpgkey=http://rubyworks.rubyforge.org/RubyWorks.GPG.key
+baseurl=http://yum.puppetlabs.com/el/\$releasever/dependencies/\$basearch
+gpgcheck=0
 enabled=1
 priority=1
 EOF'
