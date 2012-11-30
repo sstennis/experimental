@@ -17,11 +17,11 @@ sudo sh -c \
 'sudo cat > /etc/yum.repos.d/ruby.repo << EOF
 [ruby]
 name=ruby
-baseurl=http://repo.premiumhelp.eu/ruby/
-#baseurl=http://centos.karan.org/el\$releasever/ruby187/\$basearch/
+#baseurl=http://repo.premiumhelp.eu/ruby/
+baseurl=http://centos.karan.org/el\$releasever/ruby187/\$basearch/
 gpgcheck=0
 enabled=0
-#gpgkey=http://centos.karan.org/RPM-GPG-KEY-karan.org.txt
+gpgkey=http://centos.karan.org/RPM-GPG-KEY-karan.org.txt
 EOF'
 
 sudo sh -c \
