@@ -25,7 +25,7 @@ name=ruby
 #baseurl=http://centos.karan.org/el\$releasever/ruby187/\$basearch/
 #gpgkey=http://centos.karan.org/RPM-GPG-KEY-karan.org.txt
 # Unfortunately, rubyworks only has up to 1.8.6.
-baseurl=http://rubyworks.rubyforge.org/redhat/$releasever/RPMS/$basearch
+baseurl=http://rubyworks.rubyforge.org/redhat/\$releasever/RPMS/\$basearch
 gpgkey=http://rubyworks.rubyforge.org/RubyWorks.GPG.key
 gpgcheck=1
 enabled=1
@@ -50,8 +50,8 @@ gpgcheck=0
 EOF'
 
 sudo yum remove -y ruby*
-#sudo yum install -y ruby ruby-libs ruby-irb ruby-rdoc
-sudo yum --enablerepo="ruby" install -y ruby ruby-libs ruby-irb ruby-rdoc
+sudo yum install -y ruby ruby-libs ruby-irb ruby-rdoc
+#sudo yum --enablerepo="ruby" install -y ruby ruby-libs ruby-irb ruby-rdoc
 
 #sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/\$basearch/epel-release-5-4.noarch.rpm
 sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/\$basearch/epel-release-6-7.noarch.rpm
