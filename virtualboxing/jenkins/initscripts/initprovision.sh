@@ -158,4 +158,6 @@ if [ ! $PUPPET_IS_AVAILABLE -eq 0 ]; then
 	fi
 fi
 
+
+# Now provision Jenkins using puppet manifests.
 sudo $REPOSITORY_DIRECTORY/virtualboxing/jenkins/initscripts/provisionjenkins.sh
