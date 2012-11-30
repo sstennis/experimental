@@ -115,7 +115,7 @@ if [ ! -d "$REPOSITORY_DIRECTORY" ]; then
 	mkdir -p "$REPOSITORY_DIRECTORY" || die "cannot create: $REPOSITORY_DIRECTORY"
 
 	# Move to the Build directory in preparation to clone the repository
-	cd "$REPOSITORY_DIRECTORY" || die "cannot switch to: $REPOSITORY_DIRECTORY"
+	pushd "$REPOSITORY_DIRECTORY" || die "cannot switch to: $REPOSITORY_DIRECTORY"
 
 	# Clone the repository
 	git clone "$REPOSITORY_URL" "$REPOSITORY_DIRECTORY" || die "cannot clone $REPOSITORY_URL to $REPOSITORY_DIRECTORY"
@@ -124,7 +124,7 @@ if [ ! -d "$REPOSITORY_DIRECTORY" ]; then
 	git submodule init
 else
 	# Move to the Build directory in preparation to update the repository
-	cd "$REPOSITORY_DIRECTORY" || die "cannot switch to: $REPOSITORY_DIRECTORY"
+	pushd "$REPOSITORY_DIRECTORY" || die "cannot switch to: $REPOSITORY_DIRECTORY"
 
 	# Update the repository
     #   First revert any changes to the local build repo. This shouldn't effect any changes in user fork, as the build
@@ -142,6 +142,11 @@ fi
 
 # Update any submodules (other git repos within our git repo) in the repo
 git submodule update
+
+
+
+# Move back to origin dir.
+popd
 
 
 
