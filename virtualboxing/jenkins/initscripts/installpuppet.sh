@@ -57,3 +57,7 @@ sudo yum --enablerepo=epel,epel-puppet install -y puppet
 sudo sh -c 'echo "    server = master.local" >> /etc/puppet/puppet.conf'
 sudo /sbin/service puppet restart
 sudo /sbin/chkconfig puppet on
+
+# Install the puppet stdlib module, for things like anchor type, and lots of other
+# useful functions.
+sudo puppet module install puppetlabs/stdlib
