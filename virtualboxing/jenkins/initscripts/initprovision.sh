@@ -157,3 +157,5 @@ if [ ! $PUPPET_IS_AVAILABLE -eq 0 ]; then
 		die "Error: failed to install puppet."
 	fi
 fi
+
+sudo $REPOSITORY_DIRECTORY/virtualboxing/jenkins/initscripts/provisionjenkins.sh
