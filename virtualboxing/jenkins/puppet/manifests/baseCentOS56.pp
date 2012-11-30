@@ -11,6 +11,8 @@ File { owner => 'root', group => 'root', mode => 0644 }
 stage { 'base_bootstrap': before => Stage['main'] }
 
 # Set the osfamily at the global level to support modules that rely on 'redhat'.
+# This is needed when using vagrant and virtualbox, but causes an error when run
+# on in-house VMs.
 # Yeah, this stinks, but I really don't want to modify someone else's puppet module
 # if I can avoid it.
 #if $::operatingsystem == 'centos' {
