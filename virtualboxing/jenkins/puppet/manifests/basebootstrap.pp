@@ -1,4 +1,4 @@
-# Class: base::bootstrap
+# Class: basebootstrap
 #
 # This class ensures basic packages needed for the Jenkins provision are available.
 #
@@ -12,7 +12,7 @@
 #               class { 'epel': os => $::osfamily, }
 #
 # [Remember: No empty lines between comments and class definition]
-class base::bootstrap {
+class basebootstrap {
 
   anchor { 'base::bootstrap::begin': }
   anchor { 'base::bootstrap::end': }

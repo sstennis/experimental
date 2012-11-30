@@ -20,7 +20,7 @@ stage { 'base_bootstrap': before => Stage['main'] }
 
 node default {
 
-	class { 'base::bootstrap': 
+	class { 'basebootstrap': 
 	  stage => 'base_bootstrap'
 	}
 	
