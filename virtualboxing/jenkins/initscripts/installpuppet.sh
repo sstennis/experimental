@@ -18,7 +18,9 @@ sudo sh -c \
 [ruby]
 name=ruby
 #baseurl=http://repo.premiumhelp.eu/ruby/
-baseurl=http://rubyworks.rubyforge.org/redhat/RPMS/\$basearch/
+baseurl=http://centos.karan.org/el\$releasever/ruby187/\$basearch/
+gpgkey=http://centos.karan.org/RPM-GPG-KEY-karan.org.txt
+#baseurl=http://rubyworks.rubyforge.org/redhat/RPMS/\$basearch/
 gpgcheck=0
 enabled=0
 EOF'
