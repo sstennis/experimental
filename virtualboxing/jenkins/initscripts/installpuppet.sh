@@ -13,16 +13,23 @@ gpgcheck=1
 gpgkey=http://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs
 EOF'
 
+#
+#	This works, but after installing puppet and attempting to run puppet,
+#	a "Cipher is not a module" error pops out of the rubygems code.
+#
 sudo sh -c \
 'sudo cat > /etc/yum.repos.d/ruby.repo << EOF
 [ruby]
 name=ruby
 #baseurl=http://repo.premiumhelp.eu/ruby/
-baseurl=http://centos.karan.org/el\$releasever/ruby187/\$basearch/
-gpgkey=http://centos.karan.org/RPM-GPG-KEY-karan.org.txt
-#baseurl=http://rubyworks.rubyforge.org/redhat/RPMS/\$basearch/
-gpgcheck=0
-enabled=0
+#baseurl=http://centos.karan.org/el\$releasever/ruby187/\$basearch/
+#gpgkey=http://centos.karan.org/RPM-GPG-KEY-karan.org.txt
+# Unfortunately, rubyworks only has up to 1.8.6.
+baseurl=http://rubyworks.rubyforge.org/redhat/$releasever/RPMS/$basearch
+gpgkey=http://rubyworks.rubyforge.org/RubyWorks.GPG.key
+gpgcheck=1
+enabled=1
+priority=1
 EOF'
 
 sudo sh -c \
@@ -42,7 +49,7 @@ enabled=0
 gpgcheck=0
 EOF'
 
-sudo yum remove -y ruby ruby-libs ruby-irb ruby-rdoc
+sudo yum remove -y ruby*
 #sudo yum install -y ruby ruby-libs ruby-irb ruby-rdoc
 sudo yum --enablerepo="ruby" install -y ruby ruby-libs ruby-irb ruby-rdoc
 
@@ -50,6 +57,7 @@ sudo yum --enablerepo="ruby" install -y ruby ruby-libs ruby-irb ruby-rdoc
 sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/\$basearch/epel-release-6-7.noarch.rpm
 #sudo yum update
 
+sudo yum remove -y puppet
 sudo yum --enablerepo=epel,epel-puppet install -y puppet
 
 #yum --enablerepo=epel,epel-puppet install -y puppet-server
