@@ -18,9 +18,22 @@ class epel (
 ) {
   
   if $osf == 'redhat' {
-	  exec { 'epel_install':
-	    command => 'sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm',
-	  }
+    yumrepo { 'epel':
+	    descr          => 'Extra Packages for Enterprise Linux 5 - \$basearch',
+	    mirrorlist     =>  'http://mirrors.fedoraproject.org/mirrorlist?repo=epel-5&arch=\$basearch',
+	    failovermethod => 'priority',
+	    enabled        => 1,
+	    gpgcheck       => 0,
+    }
+    
+    package { 'epel': }
+
+    #exec { 'epel_install':
+    #  command => 'sudo yum install -y epel',
+    #}
+	  #exec { 'epel_install':
+	  #  command => 'sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm',
+	  #}
   }
   else {
     fail("Class['epelinstall']: Unsupported OS family: ${osf}")
