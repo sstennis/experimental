@@ -39,9 +39,9 @@ gpgcheck=0
 EOF'
 
 sudo yum install -y ruby
-sudo yum --enablerepo="ruby" update ruby
+sudo yum --enablerepo="ruby" update -y ruby
 
-sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-5.noarch.rpm
+sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-7.noarch.rpm
 #sudo yum update
 
 sudo yum --enablerepo=epel,epel-puppet install -y puppet
