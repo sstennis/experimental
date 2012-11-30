@@ -5,4 +5,6 @@
 
 THIS_DIRECTORY="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-sudo puppet apply $THIS_DIRECTORY/../puppet/manifests/baseCentOS56.pp
+pushd $THIS_DIRECTORY/../puppet/manifests
+sudo puppet apply baseCentOS56.pp
+popd
