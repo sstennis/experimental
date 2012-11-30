@@ -14,8 +14,8 @@
 # [Remember: No empty lines between comments and class definition]
 class basebootstrap {
 
-  anchor { 'base::bootstrap::begin': }
-  anchor { 'base::bootstrap::end': }
+  anchor { 'basebootstrap::begin': }
+  anchor { 'basebootstrap::end': }
 
   # Messages
   notify { 'base_bootstrap_start_msg':
@@ -44,10 +44,10 @@ class basebootstrap {
   }
  
   #Ordering of ops.
-  Anchor['base::bootstrap::begin']    ->
+  Anchor['basebootstrap::begin']    ->
   Notify['base_bootstrap_start_msg']  ->
   Group['puppet_group']               ->
   Class['epel']                       ->
   Package['puppet']                   ->
-  Anchor['base::bootstrap::end']
+  Anchor['basebootstrap::end']
 }
