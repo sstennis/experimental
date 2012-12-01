@@ -4,3 +4,6 @@
 [submodule "virtualboxing/jenkins/puppet/modules/firewall"]
 	path = virtualboxing/jenkins/puppet/modules/firewall
 	url = https://github.com/puppetlabs/puppetlabs-firewall.git
+[submodule "virtualboxing/jenkins/puppet/modules/stdlib"]
+	path = virtualboxing/jenkins/puppet/modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib.git

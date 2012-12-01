@@ -26,14 +26,13 @@ class epel (
 	    gpgcheck       => 0,
     }
     ->
-    package { 'epel': }
-#    exec { 'epel_install':
-#      command => 'sudo yum install -y epel',
-#      user    => 'root',
-#    }
+    #package { 'epel': }
+    exec { 'epel_install':
+      command => 'su --session-command="yum install -y epel"',
+    }
 
 	  #exec { 'epel_install':
-	  #  command => 'sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm',
+	  #  command => 'sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-7.noarch.rpm',
 	  #}
   }
   else {

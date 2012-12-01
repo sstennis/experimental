@@ -32,7 +32,7 @@ class sunjava (
 	  # Download the Sun JRE rpm package for CentOS.
 	  # The default timeout is overridden with a larger value as the download can take a while.
 	  exec { 'download_java':
-	    command => "sudo wget -O jre-linux-x64.rpm -c http://javadl.sun.com/webapps/download/AutoDL?BundleId=69466",
+	    command => 'su --session-command="wget -O jre-linux-x64.rpm -c http://javadl.sun.com/webapps/download/AutoDL?BundleId=69466"',
 	    path    => '/usr/bin',
 	    cwd     => '/usr/share/rpms',
 	    creates => '/usr/share/rpms/jre-linux-x64.rpm',
@@ -43,7 +43,7 @@ class sunjava (
 	  # Necessary because CentOS comes with a Java implementation that is not compatible
 	  # with Jenkins.
 	  exec { 'uninstall_defaultjava':
-	    command => 'sudo yum remove java',
+	    command => 'su --session-command="yum remove java"',
 	    path => '/usr/bin',
 	  }
 	  
@@ -53,7 +53,7 @@ class sunjava (
 	  # come with a jre at all. Running package { 'jre': } installs the openJDK RE, then produces an error
 	  # that the package couldn't be found.
 	  exec { 'install_java':
-	    command => 'sudo rpm -ivh /usr/share/rpms/jre-linux-x64.rpm',
+	    command => 'su --session-command="rpm -ivh /usr/share/rpms/jre-linux-x64.rpm"',
 	    path => ["/usr/bin", "/bin"],
 	  }
 	
