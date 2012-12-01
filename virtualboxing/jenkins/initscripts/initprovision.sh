@@ -169,7 +169,13 @@ fi
 # This location is typically /etc/puppet/manifests and /etc/puppet/modules
 # Because of this, it is essential to use unique names for manifests in the root
 # manifest dir and modules in the modules dir.
-sudo cp -rl $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/* /etc/puppet/modules
+sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/epel /etc/puppet/modules/epel
+sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/firewall /etc/puppet/modules/firewall
+sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/git /etc/puppet/modules/git
+sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/jenkins /etc/puppet/modules/jenkins
+sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/jenkinsprep /etc/puppet/modules/jenkinsprep
+sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/sunjava /etc/puppet/modules/sunjava
+
 
 
 

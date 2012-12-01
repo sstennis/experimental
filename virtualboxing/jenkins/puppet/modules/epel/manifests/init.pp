@@ -29,6 +29,7 @@ class epel (
     #package { 'epel': }
     exec { 'epel_install':
       command => 'sudo yum install -y epel',
+      user    => 'root',
     }
 
 	  #exec { 'epel_install':
