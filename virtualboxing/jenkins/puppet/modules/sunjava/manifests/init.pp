@@ -43,7 +43,7 @@ class sunjava (
 	  # Necessary because CentOS comes with a Java implementation that is not compatible
 	  # with Jenkins.
 	  exec { 'uninstall_defaultjava':
-	    command => 'su --session-command="yum remove java"',
+	    command => 'su --session-command="yum remove -y java"',
       path    => ['/bin', '/usr/bin'],
 	  }
 	  
