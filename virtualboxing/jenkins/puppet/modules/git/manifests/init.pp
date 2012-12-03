@@ -29,13 +29,13 @@ class git (
 	  }
 
 #    exec { 'add_git_package':
-#      command => 'sudo rpm -Uvh http://repo.webtatic.com/yum/centos/5/latest.rpm',
+#      command => 'su --session-command="rpm -Uvh http://repo.webtatic.com/yum/centos/5/latest.rpm"',
 #      before  => Exec['install_git'],
 #    }
 #  
 #    # This has two prompts for Y/N, and using yum -y option to answer yes to both.
 #    exec { 'install_git':
-#      command => 'sudo yum -y install --enablerepo=webtatic git',
+#      command => 'su --session-command="yum -y install --enablerepo=webtatic git"',
 #      require => Exec['add_git_package'],
 #      before  => File['/etc/gitconfig'],
 #    }

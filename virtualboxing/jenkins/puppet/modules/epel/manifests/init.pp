@@ -32,7 +32,7 @@ class epel (
     }
 
 	  #exec { 'epel_install':
-	  #  command => 'sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-7.noarch.rpm',
+	  #  command => 'su --session-command="rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-7.noarch.rpm"',
 	  #}
   }
   else {

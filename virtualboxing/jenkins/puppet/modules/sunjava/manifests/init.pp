@@ -24,7 +24,7 @@ class sunjava (
 
 	  # Create a directory for rpms first if it doesn't exist already.
 	  exec { 'mkdir_rpms':
-	    command => "sudo mkdir /usr/share/rpms",
+	    command => 'su --session-command="mkdir /usr/share/rpms"',
 	    path    => ['/usr/bin', '/bin'],
 	    creates => '/usr/share/rpms/',
 	  }
@@ -79,7 +79,7 @@ class sunjava (
 	  #  name   => 'jdk',
 	  #}
 	  #exec { 'install-java':
-	  #  command => 'sudo yum install java-1.6.0-openjdk',
+	  #  command => 'su --session-command="yum install java-1.6.0-openjdk"',
 	  #  path => '/usr/bin',
 	  #}
   }
