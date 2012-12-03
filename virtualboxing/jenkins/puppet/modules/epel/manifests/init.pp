@@ -29,10 +29,12 @@ class epel (
     #package { 'epel': }
     exec { 'epel_install':
       command => 'su --session-command="yum install -y epel"',
+      path    => ['/bin', '/usr/bin'],
     }
 
 	  #exec { 'epel_install':
 	  #  command => 'su --session-command="rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-7.noarch.rpm"',
+    #  path    => ['/bin'],
 	  #}
   }
   else {

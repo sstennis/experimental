@@ -25,7 +25,7 @@ class sunjava (
 	  # Create a directory for rpms first if it doesn't exist already.
 	  exec { 'mkdir_rpms':
 	    command => 'su --session-command="mkdir /usr/share/rpms"',
-	    path    => ['/usr/bin', '/bin'],
+	    path    => ['/bin'],
 	    creates => '/usr/share/rpms/',
 	  }
 
@@ -33,7 +33,7 @@ class sunjava (
 	  # The default timeout is overridden with a larger value as the download can take a while.
 	  exec { 'download_java':
 	    command => 'su --session-command="wget -O jre-linux-x64.rpm -c http://javadl.sun.com/webapps/download/AutoDL?BundleId=69466"',
-	    path    => '/usr/bin',
+      path    => ['/bin', '/usr/bin'],
 	    cwd     => '/usr/share/rpms',
 	    creates => '/usr/share/rpms/jre-linux-x64.rpm',
 	    timeout => '600',
@@ -44,7 +44,7 @@ class sunjava (
 	  # with Jenkins.
 	  exec { 'uninstall_defaultjava':
 	    command => 'su --session-command="yum remove java"',
-	    path => '/usr/bin',
+      path    => ['/bin', '/usr/bin'],
 	  }
 	  
 	  # Run the package installer for the downloaded jre package.
@@ -54,7 +54,7 @@ class sunjava (
 	  # that the package couldn't be found.
 	  exec { 'install_java':
 	    command => 'su --session-command="rpm -ivh /usr/share/rpms/jre-linux-x64.rpm"',
-	    path => ["/usr/bin", "/bin"],
+      path    => ['/bin'],
 	  }
 	
 	  # Order of operations.
@@ -80,7 +80,7 @@ class sunjava (
 	  #}
 	  #exec { 'install-java':
 	  #  command => 'su --session-command="yum install java-1.6.0-openjdk"',
-	  #  path => '/usr/bin',
+    #  path    => ['/bin', '/usr/bin'],
 	  #}
   }
 }
