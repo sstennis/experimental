@@ -71,6 +71,7 @@ shift
 #	for Icix as valid, and in Dev as below for developers too.
 case $REPOSITORY in
 	"Icix") 			echo "Valid repository";;
+	"Icix-Server") 		echo "Valid repository";;
 	"GKeighley") 		echo "Valid repository";;
 	"guohuang") 		echo "Valid repository";;
 	"sstennis") 		echo "Valid repository";;
@@ -111,17 +112,17 @@ REPOSITORY_URL="https://github.com/sstennis/experimental.git"
 
 # If the repo doesn't exist locally, clone it, otherwise update it.
 if [ ! -d "$REPOSITORY_DIRECTORY" ]; then
-	echo "Creating Output Directory $REPOSITORY_DIRECTORY and cloning gitHub repository $REPOSITORY_URL"
+	echo "Creating Output Directory $REPOSITORY_DIRECTORY"
 	mkdir -p "$REPOSITORY_DIRECTORY" || die "cannot create: $REPOSITORY_DIRECTORY"
 
 	# Move to the Build directory in preparation to clone the repository
 	pushd "$REPOSITORY_DIRECTORY" || die "cannot switch to: $REPOSITORY_DIRECTORY"
 
 	# Clone the repository
+	echo "Cloning gitHub repository $REPOSITORY_URL"
+	echo "git clone $REPOSITORY_URL $REPOSITORY_DIRECTORY"
 	git clone "$REPOSITORY_URL" "$REPOSITORY_DIRECTORY" || die "cannot clone $REPOSITORY_URL to $REPOSITORY_DIRECTORY"
 	
-	# Add the submodule repository URLs to .git/config.
-	git submodule init
 else
 	# Move to the Build directory in preparation to update the repository
 	pushd "$REPOSITORY_DIRECTORY" || die "cannot switch to: $REPOSITORY_DIRECTORY"
@@ -131,12 +132,15 @@ else
     #   repo should be located in a different location than the working fork/branch.
     git reset --hard HEAD
 	git pull || die "cannot update repository at $REPOSITORY_DIRECTORY"
-	
-	if ! grep -Fq "[submodule" "$REPOSITORY_DIRECTORY"/.git/config; then
-		# Add the submodule repository URLs to .git/config.
-		git submodule init
-	fi
 fi
+
+
+
+# Add the submodule repository URLs to .git/config. From testing, if any new modules are
+# added to the .gitmodules file, failing to call git submodule init will prevent them from
+# getting into the .git/config file, and thus the git submodule update command won't include
+# them. Thus, looks like this (submodule init) needs to be done every time.
+git submodule init
 
 
 
@@ -169,12 +173,25 @@ fi
 # This location is typically /etc/puppet/manifests and /etc/puppet/modules
 # Because of this, it is essential to use unique names for manifests in the root
 # manifest dir and modules in the modules dir.
-sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/epel /etc/puppet/modules/epel
-sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/firewall /etc/puppet/modules/firewall
-sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/git /etc/puppet/modules/git
-sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/jenkins /etc/puppet/modules/jenkins
-sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/jenkinsprep /etc/puppet/modules/jenkinsprep
-sudo ln -s $REPOSITORY_DIRECTORY/virtualboxing/jenkins/puppet/modules/sunjava /etc/puppet/modules/sunjava
+sudo rm /etc/puppet/modules/ant
+sudo rm /etc/puppet/modules/epel
+sudo rm /etc/puppet/modules/firewall
+sudo rm /etc/puppet/modules/git
+sudo rm /etc/puppet/modules/java
+sudo rm /etc/puppet/modules/jenkins
+sudo rm /etc/puppet/modules/jenkinsprep
+sudo rm /etc/puppet/modules/sunjava
+sudo rm /etc/puppet/modules/wget
+
+sudo ln -s $REPOSITORY_DIRECTORY/provisioning/jenkins/puppet/modules/ant /etc/puppet/modules/ant
+sudo ln -s $REPOSITORY_DIRECTORY/provisioning/jenkins/puppet/modules/epel /etc/puppet/modules/epel
+sudo ln -s $REPOSITORY_DIRECTORY/provisioning/jenkins/puppet/modules/firewall /etc/puppet/modules/firewall
+sudo ln -s $REPOSITORY_DIRECTORY/provisioning/jenkins/puppet/modules/git /etc/puppet/modules/git
+sudo ln -s $REPOSITORY_DIRECTORY/provisioning/jenkins/puppet/modules/java /etc/puppet/modules/java
+sudo ln -s $REPOSITORY_DIRECTORY/provisioning/jenkins/puppet/modules/jenkins /etc/puppet/modules/jenkins
+sudo ln -s $REPOSITORY_DIRECTORY/provisioning/jenkins/puppet/modules/jenkinsprep /etc/puppet/modules/jenkinsprep
+sudo ln -s $REPOSITORY_DIRECTORY/provisioning/jenkins/puppet/modules/sunjava /etc/puppet/modules/sunjava
+sudo ln -s $REPOSITORY_DIRECTORY/provisioning/jenkins/puppet/modules/wget /etc/puppet/modules/wget
 
 
 

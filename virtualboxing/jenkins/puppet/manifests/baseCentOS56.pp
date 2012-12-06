@@ -15,9 +15,9 @@ stage { 'base_bootstrap': before => Stage['main'] }
 # on in-house VMs.
 # Yeah, this stinks, but I really don't want to modify someone else's puppet module
 # if I can avoid it.
-#if $::operatingsystem == 'centos' {
-#  $osfamily = 'redhat'
-#}
+if $::operatingsystem == 'centos' {
+  $osfamily = 'redhat'
+}
   
 
 node default {

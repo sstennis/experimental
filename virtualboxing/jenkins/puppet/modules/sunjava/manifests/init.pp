@@ -18,8 +18,10 @@ class sunjava (
   ) {
 
   # Download and install Sun java.
+  # Note that Sun doesn't provide a yum repo, so need to do this directly with rpm.
   # Purported to be necessary because CentOS comes with a Java implementation that is not
-  # compatible with Jenkins.
+  # compatible with Jenkins. Per Jenkins docs, Jenkins works best with a Sun implementation of Java.
+  # See https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+RedHat+distributions
   if $os == 'centos' {
 
 	  # Create a directory for rpms first if it doesn't exist already.
@@ -55,6 +57,8 @@ class sunjava (
 	  exec { 'install_java':
 	    command => 'su --session-command="rpm -ivh /usr/share/rpms/jre-linux-x64.rpm"',
       path    => ['/bin'],
+      onlyif  => '/usr/bin/test `/bin/rpm -q jre` = ""',
+      #unless  => '/usr/bin/test `/bin/rpm -q jre`',
 	  }
 	
 	  # Order of operations.
